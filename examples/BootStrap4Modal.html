@@ -1,0 +1,216 @@
+<!-- Test FXT app
+ Orig example - https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_modal&stacked=h
+-->
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bootstrap 4 Model Example</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="Fxt.js"></script>
+
+<style>
+.modal {
+    overflow: hidden;
+}
+.modal-header{
+    height:30px;
+    background-color:#2d3039;
+    color:#FFFFFF;
+}
+.modal-title{
+    margin-top:-10px;
+    font-size:16px;
+}
+.modal-header .close{
+    margin-top:-28px;
+    color:#fff;
+}
+.modal-body{
+    color:#888;
+}
+.modal-body p {
+    text-align:center;
+    padding-top:10px;
+}
+.btn-primary{
+    background-color:#2d3039!important;
+    color:#FFFFFF!important;
+}  
+</style>
+    
+<script>
+	window.addEventListener("load", function() {
+		const v1 = Fxt.create("div", {
+            id : "v1", 
+            renderTo : "apDiv1",
+            style : "",
+            afterrender: function () {
+                Fxt.logger("afterrender viewport v1 WAS created");
+                Fxt.setCmp("v1").setAttribute("class", "container");
+            },
+            items : 
+            [
+                {
+                    xtype : "h2",
+                    id : "v1_txt1", 
+                    text : 'Modal Example',
+                    renderTo : "v1",
+                    style: "opacity:1;",
+                    afterrender: function () {
+                        //
+                    }
+                },
+                {
+                    xtype : "input",
+                    id : "v1_txt2", 
+                    text : "",
+                    renderTo : "v1",
+                    style: "opacity:1;",
+                    afterrender: function () {
+                        Fxt.setCmp("v1_txt2").setAttribute("class", "btn btn-primary");
+
+                        Fxt.setCmp("v1_txt2").type = "button";
+                        Fxt.setCmp("v1_txt2").value = "Open modal";
+
+                        $('#v1_txt2').click(function() {
+                            $('#myModal').modal({
+                                backdrop: true,
+                                show: true
+                            });
+                        });
+                    }
+                },
+                {
+                    xtype : "div",
+                    id : "myModal", 
+                    text : "",
+                    renderTo : "v1",
+                    style: "opacity:1;",
+                    afterrender: function () {
+                        Fxt.setCmp("myModal").setAttribute("class", "modal fade");
+                        Fxt.setCmp("myModal").setAttribute("tabindex", "-1");
+                        Fxt.setCmp("myModal").setAttribute("role", "dialog");
+                        Fxt.setCmp("myModal").setAttribute("aria-labelledby", "myModalLabel");
+                    },
+                    items : 
+                    [
+                        {
+                            xtype : "div",
+                            id : "modalDialog", 
+                            text : '',
+                            renderTo : "myModal",
+                            style: "opacity:1;",
+                            afterrender: function () {
+                                Fxt.setCmp("modalDialog").setAttribute("class", "modal-dialog");
+                            },
+                            items : 
+                            [
+                                {
+                                    xtype : "div",
+                                    id : "modalContent", 
+                                    text : '',
+                                    renderTo : "modalDialog",
+                                    style: "opacity:1;",
+                                    afterrender: function () {
+                                        Fxt.setCmp("modalContent").setAttribute("class", "modal-content");
+                                    },
+                                    items : 
+                                    [
+                                        {
+                                            xtype : "div",
+                                            id : "modalHeader", 
+                                            text : '',
+                                            renderTo : "modalContent",
+                                            style: "opacity:1;",
+                                            afterrender: function () {
+                                                Fxt.setCmp("modalHeader").setAttribute("class", "modal-header");
+                                            },
+                                            items : 
+                                            [
+                                                {
+                                                    xtype : "h4",
+                                                    id : "modalTitle", 
+                                                    text : 'Modal Heading',
+                                                    renderTo : "modalHeader",
+                                                    style: "opacity:1;",
+                                                    afterrender: function () {
+                                                        Fxt.setCmp("modalTitle").setAttribute("class", "modal-title");
+                                                    }
+                                                },
+                                                {
+                                                    xtype : "input",
+                                                    id : "closeModalBtnHeader", 
+                                                    text : "",
+                                                    renderTo : "modalHeader",
+                                                    style: "opacity:1;",
+                                                    afterrender: function () {
+                                                        Fxt.setCmp("closeModalBtnHeader").type = "button";
+                                                        Fxt.setCmp("closeModalBtnHeader").setAttribute("data-dismiss", "modal");  
+                                                        Fxt.setCmp("closeModalBtnHeader").setAttribute("class", "close");
+                                                        Fxt.setCmp("closeModalBtnHeader").style.cssText += 'width:49px;height:56px;background: transparent;border:none;';
+                                                        Fxt.setCmp('closeModalBtnHeader').style.cssText += 'font-size:16px;font-family: "FontAwesome" !important;';
+                                                        Fxt.setCmp("closeModalBtnHeader").value = String.fromCharCode(0xf00d) ;
+                                                    }
+                                                },
+                                                {
+                                                    xtype : "div",
+                                                    id : "modalBody", 
+                                                    text : 'Modal body..',
+                                                    renderTo : "modalContent",
+                                                    style: "opacity:1;",
+                                                    afterrender: function () {
+                                                        Fxt.setCmp("modalBody").setAttribute("class", "modal-body");
+                                                    }
+                                                },
+                                                {
+                                                    xtype : "div",
+                                                    id : "modalFooter", 
+                                                    text : '',
+                                                    renderTo : "modalContent",
+                                                    style: "opacity:1;",
+                                                    afterrender: function () {
+                                                        Fxt.setCmp("modalFooter").setAttribute("class", "modal-footer");
+                                                    },
+                                                    items : [
+                                                        {
+                                                            xtype : "input",
+                                                            id : "closeModalBtn", 
+                                                            text : "",
+                                                            renderTo : "modalFooter",
+                                                            style: "opacity:1;",
+                                                            afterrender: function () {
+                                                                Fxt.setCmp("closeModalBtn").setAttribute("class", "btn btn-danger");
+                                                                Fxt.setCmp("closeModalBtn").type = "button";
+                                                                Fxt.setCmp("closeModalBtn").value = "Close";
+                                                                Fxt.setCmp("closeModalBtn").setAttribute("data-dismiss", "modal");  
+                                                            }
+                                                        },
+                                                    ]
+                                                },
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+            ]
+        }); 
+	});
+</script>
+ 
+</head>
+
+<body>
+	<div id="apDiv1"></div>
+</body>
+</html>

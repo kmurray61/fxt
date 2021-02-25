@@ -1,0 +1,139 @@
+@charset "utf-8";
+
+.button2 {
+    background-color: #2d3039;
+    color: #ffffff;
+    padding-top: -2px;
+    padding-left: 3px;
+    font-size: 14px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    transition: all 0.20s ease-in-out;
+    -webkit-transition: all 0.20s ease-in-out;
+    -moz-transition: all 0.20s ease-in-out;
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+}
+
+:root {
+    --radius: 2px;
+    --baseFg: dimgray;
+    --baseBg: white;
+    --accentFg: #000000;
+    --accentBg: #ffffff;
+}
+
+.theme-pink {
+	--radius: 2em;
+	--baseFg: #c70062;
+	--baseBg: #ffe3f1;
+	--accentFg: #c70062;
+	--accentBg: #ffaad4;
+}
+
+.theme-construction {
+	--radius: 0;
+	--baseFg: white;
+	--baseBg: black;
+	--accentFg: black;
+	--accentBg: orange;
+}
+
+select {
+	font: 400 12px/1.3 sans-serif!important;
+	-webkit-appearance: none!important;
+	appearance: none!important;
+	color: var(--baseFg)!important;
+	border: 1px solid #FFF;
+	line-height: 1!important;
+	outline: 0!important;
+	padding: 0.65em 2.5em 0.55em 0.75em!important;
+	border-radius: var(--radius)!important;
+	background-color: var(--baseBg)!important;
+	background-image:url(https://cdn.pointtrans.com/images/chat/assets/trigger2.png)!important;
+	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat!important;
+	background-position: right 1px center, right bottom, right bottom, right bottom!important;  
+	cursor:pointer!important;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.member-pic-list {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: -61px;
+    border-radius: 45px;
+    background-color: rgba(255, 255, 255, .3);
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: solid #A8A8A6;
+    cursor: pointer !important;
+}
+
+input:focus{
+    outline: none;   
+}
+
+a:active {
+  outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding-top:7px;
+}
+
+.btn-primary:focus {
+    outline: none;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding-top:7px;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-danger:focus, .btn-danger.focus {
+    box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
+}
+
+.modal-backdrop.show {
+    opacity: .5;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
