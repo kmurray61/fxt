@@ -2,9 +2,9 @@
 
 @author Ken Murray
 
-@date 4/25/19
+@date 2/25/21
 
-*Creates a dynamic UI similar to how EXTJS does or used to extend functionality EXTJS lacks*
+*Creates a dynamic UI similar to EXTJS and used to extend functionality EXTJS lacks*
 
 Inspired by ExtJS and Flash/ActionScript.
 Simplifies common JS calls to DOM objects in a familiar format.
