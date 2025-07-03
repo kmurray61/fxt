@@ -1,14 +1,15 @@
-/**
- * FXT ( Flash Extensible Technique )
- * Inspired by ExtJS and Flash/ActionScript.
- * Creates a dynamic UI similar to EXTJS ( Sencha ).
+/*
+ * FXT (Functional Extensible Template)
+ * Inspired by ExtJS and Flash/Flex/ActionScript.
+ * Creates a dynamic UI similar to EXTJS (Sencha) JSON format.
  * Simplifies common JS calls to DOM objects in a familiar format inspired by Flash and FlexBuilder.
- * Current item depth is 10 levels MAX
+ * Current component node item depth is 10 levels MAX.
  * @author Ken Murray
- * @email virtualjam@gmail.com
+ * @email fb3@virtualjam.net
+ * @site https://virtualjam.net
  * @createdate 2/15/19
- * @updatedate 2/25/21
- * @version 3.0.02
+ * @updatedate 7/2/25
+ * @version 3.2.03
  */
 
 var Fxt = {
@@ -16,6 +17,12 @@ var Fxt = {
         try {
             let renderTo = attribute.renderTo;
             let callBack = attribute.afterrender;
+
+            attribute.renderTo = '';
+            delete attribute['renderTo'];
+
+            attribute.afterrender = '';
+            delete attribute['afterrender'];
 
             if ( typeof( element ) === "undefined" ) {
                 return false;
@@ -29,7 +36,7 @@ var Fxt = {
 
             if ( typeof(attribute) === 'object' ) {
                 for ( let key in attribute ) {
-                    if ( el != null ) {
+                    if ( el != null && el !== '' ) {
                         el.setAttribute(key, attribute[key]);
                     }
                 }
@@ -40,14 +47,14 @@ var Fxt = {
             }
 
             for ( let k = 0; k < inner.length; k++ ) {
-                if ( typeof inner[k] != 'undefined' ) {
+                if ( typeof inner[k] != 'undefined' && inner[k] !== '' ) {
                     if ( inner[k].tagName ) {
-                        if ( el != null ) {
+                        if ( el != null && el !== '' ) {
                             el.appendChild(inner[k]);
                         }
                     }
                     else {
-                        if ( el != null ) {
+                        if ( el != null && el !== '' ) {
                             el.appendChild(document.createTextNode(inner[k]));
                         }
                     }
@@ -85,13 +92,13 @@ var Fxt = {
                                             if ( typeof attribute.items[i].items[j].items[k].items[l].items != 'undefined' && attribute.items[i].items[j].items[k].items[l].items.length ) {
                                                 for ( let m = 0; m < attribute.items[i].items[j].items[k].items[l].items.length; m++ ) {
                                                     this.createChildEle( attribute.items[i].items[j].items[k].items[l].items[m] );
-                                                    if ( typeof attribute.items[i].items[j].items[k].items[l].items[m].items != 'undefined' &&     attribute.items[i].items[j].items[k].items[l].items[m].items.length) {
+                                                    if ( typeof attribute.items[i].items[j].items[k].items[l].items[m].items != 'undefined' &&  attribute.items[i].items[j].items[k].items[l].items[m].items.length) {
                                                         for ( let n = 0; n < attribute.items[i].items[j].items[k].items[l].items[m].items.length; n++ ) {
                                                             this.createChildEle( attribute.items[i].items[j].items[k].items[l].items[m].items[n] );
-                                                            if ( typeof attribute.items[i].items[j].items[k].items[l].items[m].items[n].items != 'undefined' &&     attribute.items[i].items[j].items[k].items[l].items[m].items[n].items.length) {
+                                                            if ( typeof attribute.items[i].items[j].items[k].items[l].items[m].items[n].items != 'undefined' && attribute.items[i].items[j].items[k].items[l].items[m].items[n].items.length) {
                                                                 for ( let o = 0; o < attribute.items[i].items[j].items[k].items[l].items[m].items[n].items.length; o++ ) {
                                                                     this.createChildEle( attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o] );
-                                                                    if ( typeof attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items != 'undefined' &&     attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items.length) {
+                                                                    if ( typeof attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items != 'undefined' && attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items.length) {
                                                                         for ( let p = 0; p < attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items.length; p++ ) {
                                                                             this.createChildEle( attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items[p] );
                                                                             if ( typeof attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items[p].items != 'undefined' &&     attribute.items[i].items[j].items[k].items[l].items[m].items[n].items[o].items[p].items.length) {
@@ -117,15 +124,12 @@ var Fxt = {
             }
         }
         catch ( e ) {
-            this.logger("createElement catch e = " + e );
+            Fxt.logger("createElement catch e = " + e );
         }
     },
-
-    createChildEle : function ( items ) {
+    createChildEle : function ( items ){
         try {
-            //this.logger("createChildEle FIRED items.id = " + items.id );
             let myObj = {};
-
             myObj.id = items.id;
             myObj.renderTo = items.renderTo;
 
@@ -170,30 +174,17 @@ var Fxt = {
                 items.class = items.cls;
                 myObj.class = items.cls;
             }
-
-            this.create(items.xtype, myObj, items.text, items.afterrender);
-
+            this.create(items.ftype, myObj, items.text, items.afterrender);
         }
         catch ( e ) {
             this.logger("createChildEle catch e = " + e );
         }
     },
-
     getCmp : function ( comp ) {
         try {
-            if ( comp && comp != null && comp != "" && comp != -1 ) {
+            if ( comp && comp !== "" && comp !== -1 ) {
                 if ( document.getElementById ) {
                     if ( document.getElementById( comp ) != null ) {
-                        return true;
-                    }
-                }
-                else if ( document.all ) {
-                    if ( window.document.all[ comp ] != null ) {
-                        return true;
-                    }
-                }
-                else if ( document.layers ) {
-                    if ( window.document.layers[ comp ] != null ) {
                         return true;
                     }
                 }
@@ -204,10 +195,9 @@ var Fxt = {
             console.log("getCmp catch e = " + e );
         }
     },
-
     setCmp : function ( comp ) {
         try {
-            if ( comp && comp != null && comp != "" && comp != -1 ) {
+            if ( comp && comp !== "" && comp !== -1 ) {
                 if ( document.getElementById ) {
                     return document.getElementById( comp );
                 }
@@ -224,10 +214,12 @@ var Fxt = {
             console.log("setCmp catch e = " + e );
         }
     },
-
+    getCls : function ( comp ) {
+        return document.getElementsByClassName(comp);
+    },
     setAttribute : function ( comp , attr , value ) {
         try {
-            if ( comp && comp != null && comp != "" && comp != -1 ) {
+            if ( comp && comp !== "" && comp !== -1 ) {
                 if ( document.getElementById( comp ) != null ) {
                     document.getElementById( comp ).setAttribute( attr, value );
                 }
@@ -237,10 +229,9 @@ var Fxt = {
             console.log("setAttribute catch e = " + e );
         }
     },
-
     setText : function ( comp , value ) {
         try {
-            if ( comp && comp != null && comp != "" && comp != -1 ) {
+            if ( comp && comp !== "" && comp !== -1 ) {
                 if ( document.getElementById( comp ) != null ) {
                     document.getElementById( comp ).innerHTML = value;
                 }
@@ -250,10 +241,21 @@ var Fxt = {
             console.log("setText catch e = " + e );
         }
     },
-
+    setHTML : function ( comp , value )  {
+        try {
+            if ( comp && comp !== "" && comp !== -1 ) {
+                if ( document.getElementById( comp ) != null ) {
+                    document.getElementById( comp ).innerHTML = value;
+                }
+            }
+        }
+        catch ( e ) {
+            console.log("setHTML catch e = " + e );
+        }
+    },
     appendText : function ( comp , value ) {
         try {
-            if ( comp && comp != null && comp != "" && comp != -1 ) {
+            if ( comp && comp !== "" && comp !== -1 ) {
                 if ( document.getElementById( comp ) != null ) {
                     document.getElementById( comp ).innerHTML += value;
                 }
@@ -263,13 +265,12 @@ var Fxt = {
             console.log("setText catch e = " + e );
         }
     },
-
     setStyle : function ( comp , style, value ) {
         try {
             if ( comp == null || style == null || value == null )
                 return;
 
-            if ( comp && comp != null && comp != "" && comp != -1 ) {
+            if ( comp && comp !== "" && comp !== -1 ) {
                 if ( document.getElementById( comp ) != null ) {
                     switch ( style ) {
                         case "width":
@@ -402,8 +403,7 @@ var Fxt = {
             console.log("setStyle catch e = " + e );
         }
     },
-
-    getURL : function  ( url, win ) {
+    getURL : function ( url, win ) {
         try {
             window.open(url, win);
         }
@@ -411,10 +411,65 @@ var Fxt = {
             Fxt.logger( "getURL catch e = " + e.toString() );
         }
     },
-
     logger : function ( msg ) {
         console.log( "Logger: " + msg );
+        if ( _root.dbgMode && ChatMsg != null ) {
+            ChatMsg.addText("logger:" +  msg, "system" );
+        }
+    },
+    tween : function (comp, opacityFrom, opacityTo, translateXFrom, translateXTo, translateYFrom, translateYTo, duration, easing, iterations) {
+        try {
+            //UIView.checkSizes('tween');
+            comp.animate([{ opacity: opacityFrom }, { opacity: opacityTo }], { duration: duration, easing: easing, iterations: iterations });
+            comp.animate([{ transform: 'translateX(' + translateXFrom + 'px)' }, { transform: 'translateX(' + translateXTo + 'px)'}], { duration: duration, easing: easing, iterations: iterations });
+            comp.animate([{ transform: 'translateY(' + translateYFrom + 'px)' }, { transform: 'translateY(' + translateYTo + 'px)' }], { duration: duration, easing: easing, iterations: iterations }); //Infinity
+        }
+        catch ( e ) {
+            Fxt.logger( "tween catch e = " + e.toString() );
+        }
+    },
+    animate : function ( options ) {
+        try {
+            let start = performance.now();
+            requestAnimationFrame(function animate(time) {
+                let timeFraction = (time - start) / options.duration;
+                if ( timeFraction > 1 ) {
+                    timeFraction = 1;
+                }
+
+                let progress = options.timings( timeFraction )
+                options.draw( progress );
+
+                if ( timeFraction < 1 ) {
+                    requestAnimationFrame(animate);
+                }
+
+                if ( timeFraction === 1 ) {
+                    options.complete(progress)
+                }
+            });
+        }
+        catch ( e ) {
+            Fxt.logger( "animate catch e = " + e.toString() );
+        }
     },
 }
 
 
+/*
+clearTimeout(_root.animateIVL)
+_root.animateIVL = setTimeout( function() {
+    Fxt.animate({
+        duration: 250,
+        timings: function(timeFraction) {
+            return Math.pow(timeFraction, 2);
+        },
+        draw: function(progress) {
+            _root.videos_mc.setSize( parseFloat(parseFloat(_root.myWidth ) - 305 )  , parseFloat (progress * 30 ) );
+        },
+        complete: function(progress) {
+            console.log('complete progress ' + progress );
+        }
+    })
+}, 500);
+ */

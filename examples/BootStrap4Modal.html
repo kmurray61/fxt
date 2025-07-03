@@ -14,7 +14,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="Fxt.js"></script>
+<script src="../Fxt.js"></script>
+<script src="../FxtUtils.js"></script>
 
 <style>
 .modal {
@@ -59,24 +60,20 @@
             items : 
             [
                 {
-                    xtype : "h2",
+                    ftype : "h2",
                     id : "v1_txt1", 
                     text : 'Modal Example',
                     renderTo : "v1",
                     style: "opacity:1;",
-                    afterrender: function () {
-                        //
-                    }
                 },
                 {
-                    xtype : "input",
+                    ftype : "input",
                     id : "v1_txt2", 
                     text : "",
                     renderTo : "v1",
                     style: "opacity:1;",
                     afterrender: function () {
                         Fxt.setCmp("v1_txt2").setAttribute("class", "btn btn-primary");
-
                         Fxt.setCmp("v1_txt2").type = "button";
                         Fxt.setCmp("v1_txt2").value = "Open modal";
 
@@ -89,7 +86,7 @@
                     }
                 },
                 {
-                    xtype : "div",
+                    ftype : "div",
                     id : "myModal", 
                     text : "",
                     renderTo : "v1",
@@ -103,7 +100,7 @@
                     items : 
                     [
                         {
-                            xtype : "div",
+                            ftype : "div",
                             id : "modalDialog", 
                             text : '',
                             renderTo : "myModal",
@@ -114,7 +111,7 @@
                             items : 
                             [
                                 {
-                                    xtype : "div",
+                                    ftype : "div",
                                     id : "modalContent", 
                                     text : '',
                                     renderTo : "modalDialog",
@@ -125,7 +122,7 @@
                                     items : 
                                     [
                                         {
-                                            xtype : "div",
+                                            ftype : "div",
                                             id : "modalHeader", 
                                             text : '',
                                             renderTo : "modalContent",
@@ -136,7 +133,7 @@
                                             items : 
                                             [
                                                 {
-                                                    xtype : "h4",
+                                                    ftype : "h4",
                                                     id : "modalTitle", 
                                                     text : 'Modal Heading',
                                                     renderTo : "modalHeader",
@@ -146,7 +143,7 @@
                                                     }
                                                 },
                                                 {
-                                                    xtype : "input",
+                                                    ftype : "input",
                                                     id : "closeModalBtnHeader", 
                                                     text : "",
                                                     renderTo : "modalHeader",
@@ -161,7 +158,7 @@
                                                     }
                                                 },
                                                 {
-                                                    xtype : "div",
+                                                    ftype : "div",
                                                     id : "modalBody", 
                                                     text : 'Modal body..',
                                                     renderTo : "modalContent",
@@ -171,7 +168,7 @@
                                                     }
                                                 },
                                                 {
-                                                    xtype : "div",
+                                                    ftype : "div",
                                                     id : "modalFooter", 
                                                     text : '',
                                                     renderTo : "modalContent",
@@ -181,7 +178,7 @@
                                                     },
                                                     items : [
                                                         {
-                                                            xtype : "input",
+                                                            ftype : "input",
                                                             id : "closeModalBtn", 
                                                             text : "",
                                                             renderTo : "modalFooter",
@@ -211,6 +208,6 @@
 </head>
 
 <body>
-	<div id="apDiv1"></div>
+<div id="apDiv1"></div>
 </body>
 </html>
