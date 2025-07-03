@@ -1,0 +1,82 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>FxtJS Alert Example</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../Fxt.js"></script>
+    <script src="../FxtUtils.js"></script>
+    <script src="../FxtUIView.js"></script>
+    <script src="../FxtWin.js"></script>
+    <script src="../FxtButton.js"></script>
+    <script src="../FxtAlert2.js"></script>
+    <link rel="stylesheet" href="../Fxt.css">
+
+    <script>
+        window.addEventListener("load", function() {
+            Alert.initComponents();
+            let str = '* FxtJS Inspired by ExtJS and Flash/Flex/ActionScript.<br>\n' +
+                '* Originally created to extend ExtJS (Sencha) functionality.<br>\n' +
+                '* Creates a dynamic UI similar to ExtJS (Sencha) JSON format.<br>\n' +
+                '* Simplifies common JS calls to DOM objects in a familiar format inspired by Flash and FlexBuilder.<br>\n' +
+                '* Current component node items depth is 10 levels MAX.<br>\n' +
+                '* Library expanded to include custom reusable components and helper functions.<br>\n' +
+                '* Alert / Dialog Component.<br>\n' +
+                '* Button and ComboBox for universal compatibility, style, and functionality.<br>\n' +
+                '* Window Component Draggable, Closeable or Chromeless container.<br>\n' +
+                '* UIView controller for handling resize events.<br>\n' +
+                '* Utilities to support components.'
+            Alert.show( str , "FxtJS" , "OK" , null, Alert.alert_Handler , 500 , 450, true);
+            Fxt.setCmp("msgAlertTxt").style.cssText += 'text-align: left !important;font-size:16px!important;';
+
+            _root.alertBtn = new fxtButton('alertBtn',
+                'button',
+                '100%',
+                '33px',
+                'font-size:18px!important; max-width:144px;top: 50px;left: 50px;position: absolute;',
+                'apDiv1',
+                'Open Alert',
+                'Open Alert',
+                'fa fa-paper-plane',
+                'margin-left:2px; margin-top:2px;',
+                'alert("Hello World")',
+                'button');
+
+            _root.alertBtn.init();
+
+            Fxt.create("div", {
+                id: "sysToolTip",
+                renderTo: "apDiv1",
+                style: "background-color: #d7d7d7;min-width: 60px; border-radius: 4px;border: solid 1px #000000 !important;display: flex;flex-direction: column !important;align-items: center;justify-content:center;position: absolute;left: 205px;top: 222px;padding: 3px;",
+                afterrender: function () {
+                    Fxt.setCmp('sysToolTip').style.cssText += 'font-size:18px;align-items: center;justify-content: center; position: absolute;align-content: center;flex-wrap: wrap;';
+                },
+                items: [
+                    {
+                        ftype: 'label',
+                        id: 'sysToolTip_label',
+                        text: '',
+                        renderTo: "sysToolTip",
+                        style: 'display: block;width:100%;font-size: 14px;font-weight: normal;font-family: tahoma, arial, verdana, sans-serif; color: #000000!important;text-align: center;',
+                        afterrender: function () {
+                            if ( Fxt.getCmp("sysToolTip") ) {
+                                Fxt.setCmp('sysToolTip').style.cssText += 'display:none;';
+                            }
+                        }
+                    },
+                ]
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+<div id="apDiv1"></div>
+</body>
+</html>
