@@ -79,7 +79,7 @@
     'ChatMC.smilieBtnHandler()', 
     'button smilie-btn');
 
-###### _root.sendBtn.init();
+###### _root.smilieBtn.init();
 
 ---
 
