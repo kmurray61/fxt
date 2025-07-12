@@ -411,6 +411,33 @@ var Fxt = {
             Fxt.logger( "getURL catch e = " + e.toString() );
         }
     },
+    createStore : function (initialState) {
+        let state = initialState;
+        const listeners = [];
+
+        return {
+            getState() {
+                return state;
+            },
+            setState(newState) {
+                state = { ...state, ...newState };
+                listeners.forEach(listener => listener(state));
+            },
+            subscribe(listener) {
+                listeners.push(listener);
+                return () => {
+                    listeners.splice(listeners.indexOf(listener), 1);
+                };
+            }
+        };
+        /*
+            const store = Fxt.createStore({ count: 0 });
+            store.subscribe(newState => {
+                Fxt.logger('count:' +  newState.count);
+            });
+            store.setState({ count: store.getState().count + 1 });
+        */
+    },
     logger : function ( msg ) {
         console.log( "Logger: " + msg );
         if ( _root.dbgMode && ChatMsg != null ) {
@@ -419,7 +446,6 @@ var Fxt = {
     },
     tween : function (comp, opacityFrom, opacityTo, translateXFrom, translateXTo, translateYFrom, translateYTo, duration, easing, iterations) {
         try {
-            //UIView.checkSizes('tween');
             comp.animate([{ opacity: opacityFrom }, { opacity: opacityTo }], { duration: duration, easing: easing, iterations: iterations });
             comp.animate([{ transform: 'translateX(' + translateXFrom + 'px)' }, { transform: 'translateX(' + translateXTo + 'px)'}], { duration: duration, easing: easing, iterations: iterations });
             comp.animate([{ transform: 'translateY(' + translateYFrom + 'px)' }, { transform: 'translateY(' + translateYTo + 'px)' }], { duration: duration, easing: easing, iterations: iterations }); //Infinity
@@ -453,23 +479,4 @@ var Fxt = {
             Fxt.logger( "animate catch e = " + e.toString() );
         }
     },
-}
-
-
-/*
-clearTimeout(_root.animateIVL)
-_root.animateIVL = setTimeout( function() {
-    Fxt.animate({
-        duration: 250,
-        timings: function(timeFraction) {
-            return Math.pow(timeFraction, 2);
-        },
-        draw: function(progress) {
-            _root.videos_mc.setSize( parseFloat(parseFloat(_root.myWidth ) - 305 )  , parseFloat (progress * 30 ) );
-        },
-        complete: function(progress) {
-            console.log('complete progress ' + progress );
-        }
-    })
-}, 500);
- */
+};
