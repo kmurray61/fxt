@@ -7,7 +7,7 @@
  * @author Ken Murray
  * @email fb3@virtualjam.net
  * @site https://virtualjam.net
- * @createdate 2/15/19
+ * @createdate 3/23/18
  * @updatedate 7/2/25
  * @version 3.2.03
  */
@@ -274,11 +274,11 @@ var Fxt = {
                 if ( document.getElementById( comp ) != null ) {
                     switch ( style ) {
                         case "width":
-                            if ( value == "100%" ) {
+                            if ( value === "100%" ) {
                                 document.getElementById( comp ).style.cssText += 'width:'+value+'!important;';
                             }
                             else {
-                                if ( value.toString().indexOf("%") != -1 ) {
+                                if ( value.toString().indexOf("%") !== -1 ) {
                                     document.getElementById( comp ).style.cssText += 'width:'+value+'!important;';
                                 }
                                 else {
@@ -287,14 +287,14 @@ var Fxt = {
                             }
                             break;
                         case "height":
-                            if ( value == "100%" ) {
+                            if ( value === "100%" ) {
                                 document.getElementById( comp ).style.cssText += 'height:'+value+'!important;';
                             }
                             else {
-                                if ( value.toString().indexOf("%") != -1 ) {
+                                if ( value.toString().indexOf("%") !== -1 ) {
                                     document.getElementById( comp ).style.cssText += 'height:'+value+'!important;';
                                 }
-                                else if ( value.toString().indexOf("auto") != -1 ) {
+                                else if ( value.toString().indexOf("auto") !== -1 ) {
                                     document.getElementById( comp ).style.cssText += 'height:'+value+'!important;';
                                 }
                                 else {
@@ -306,7 +306,7 @@ var Fxt = {
                             document.getElementById( comp ).style.cssText += 'opacity:'+value+'!important;';
                             break;
                         case "visible":
-                            if ( value.toString() == "true" ) {
+                            if ( value.toString() === "true" ) {
                                 document.getElementById( comp ).style.cssText += 'visibility:visible!important;';
                             }
                             else {
