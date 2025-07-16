@@ -8,8 +8,8 @@
  * @email fb3@virtualjam.net
  * @site https://virtualjam.net
  * @createdate 3/23/18
- * @updatedate 7/2/25
- * @version 3.2.03
+ * @updatedate 7/15/25
+ * @version 3.2.04
  */
 
 var Fxt = {
